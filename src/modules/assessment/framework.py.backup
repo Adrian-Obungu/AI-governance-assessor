@@ -1,0 +1,41 @@
+"""Assessment framework definitions"""
+def get_assessment_framework():
+    """Return the complete assessment framework"""
+    return {
+        "governance": {
+            "name": "🏛️ Governance & Strategy",
+            "description": "Executive oversight, policies, and strategic alignment",
+            "questions": [
+                {
+                    "id": "GOV1",
+                    "text": "Has your organization established an AI governance committee with executive leadership?",
+                    "maturity_levels": [
+                        {"score": 0, "text": "Not Started - No formal governance structure"},
+                        {"score": 1, "text": "Initial - Informal working group exists"},
+                        {"score": 2, "text": "Developing - Formal committee without executive sponsorship"},
+                        {"score": 3, "text": "Established - Executive-led committee with regular meetings"},
+                        {"score": 4, "text": "Advanced - Committee with defined charter and decision authority"},
+                        {"score": 5, "text": "Optimized - Board-level oversight with performance metrics"}
+                    ]
+                }
+            ]
+        },
+        "risk_management": {
+            "name": "🛡️ Risk Management", 
+            "description": "Risk identification, assessment, and mitigation processes",
+            "questions": [
+                {
+                    "id": "RISK1", 
+                    "text": "Do you have a formal AI risk assessment framework?",
+                    "maturity_levels": [
+                        {"score": 0, "text": "Not Started - No formal risk assessment process"},
+                        {"score": 1, "text": "Initial - Ad-hoc risk discussions"},
+                        {"score": 2, "text": "Developing - Basic risk checklist"},
+                        {"score": 3, "text": "Established - Formal risk assessment methodology"},
+                        {"score": 4, "text": "Advanced - Integrated with enterprise risk management"},
+                        {"score": 5, "text": "Optimized - Predictive risk modeling with AI tools"}
+                    ]
+                }
+            ]
+        }
+    }

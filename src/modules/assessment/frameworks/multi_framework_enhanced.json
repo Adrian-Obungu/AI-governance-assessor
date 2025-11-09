@@ -1,0 +1,883 @@
+{
+  "name": "Multi-Framework AI Governance Assessment",
+  "version": "3.0",
+  "description": "Comprehensive AI Governance covering NIST AI RMF, ISO/IEC 42001:2023, EU AI Act, OECD Principles, and COBIT",
+  "scoring": {
+    "levels": [
+      {
+        "min": 0,
+        "max": 20,
+        "level": "Not Started",
+        "color": "#ff4444",
+        "description": "No formal processes"
+      },
+      {
+        "min": 20,
+        "max": 40,
+        "level": "Initial",
+        "color": "#ff8844",
+        "description": "Ad-hoc implementation"
+      },
+      {
+        "min": 40,
+        "max": 60,
+        "level": "Developing",
+        "color": "#ffaa00",
+        "description": "Basic processes established"
+      },
+      {
+        "min": 60,
+        "max": 80,
+        "level": "Proficient",
+        "color": "#88cc00",
+        "description": "Formal, documented processes"
+      },
+      {
+        "min": 80,
+        "max": 95,
+        "level": "Advanced",
+        "color": "#44bb44",
+        "description": "Optimized and measured"
+      },
+      {
+        "min": 95,
+        "max": 100,
+        "level": "Optimized",
+        "color": "#00aa00",
+        "description": "Continuous improvement"
+      }
+    ]
+  },
+  "domains": {
+    "governance_strategy": {
+      "name": "\ud83c\udfdb\ufe0f Governance & Strategy",
+      "description": "Executive oversight, policies, strategic alignment, and organizational structure for AI governance",
+      "questions": [
+        {
+          "id": "GOV_ISO_01",
+          "framework": "ISO/IEC 42001:2023",
+          "regulation_map": "Section 5.1 - Leadership and commitment",
+          "text": "Has top management established and communicated an AI policy aligned with organizational strategy?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No AI policy exists; leadership unaware of AI governance needs"
+            },
+            {
+              "score": 1,
+              "text": "Informal AI discussions occur but no documented policy"
+            },
+            {
+              "score": 2,
+              "text": "Draft AI policy exists but lacks executive approval and communication"
+            },
+            {
+              "score": 3,
+              "text": "Approved AI policy is communicated to key stakeholders"
+            },
+            {
+              "score": 4,
+              "text": "AI policy is integrated with enterprise strategy, regularly reviewed and updated"
+            },
+            {
+              "score": 5,
+              "text": "AI policy is continuously optimized with board-level oversight and industry benchmarking"
+            }
+          ]
+        },
+        {
+          "id": "GOV_ISO_02",
+          "framework": "ISO/IEC 42001:2023",
+          "regulation_map": "Section 5.3 - Organizational roles and responsibilities",
+          "text": "Are clear roles, responsibilities, and authorities defined for AI system lifecycle management?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No defined roles; ad-hoc responsibility assignment"
+            },
+            {
+              "score": 1,
+              "text": "Individual responsibilities exist but are not documented"
+            },
+            {
+              "score": 2,
+              "text": "Basic roles documented but lack clear authority boundaries"
+            },
+            {
+              "score": 3,
+              "text": "Clear roles and responsibilities documented and communicated"
+            },
+            {
+              "score": 4,
+              "text": "RACI matrix implemented with accountability for AI decisions"
+            },
+            {
+              "score": 5,
+              "text": "Dynamic role management with automated compliance tracking and AI ethics board oversight"
+            }
+          ]
+        },
+        {
+          "id": "GOV_EU_01",
+          "framework": "EU AI Act",
+          "regulation_map": "Article 17 - Quality management system",
+          "text": "Do you have a quality management system for AI systems covering the entire lifecycle?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No quality management system for AI"
+            },
+            {
+              "score": 1,
+              "text": "Basic quality checks on final AI outputs only"
+            },
+            {
+              "score": 2,
+              "text": "Quality procedures documented for development phase"
+            },
+            {
+              "score": 3,
+              "text": "Comprehensive QMS covering development, deployment, and monitoring"
+            },
+            {
+              "score": 4,
+              "text": "QMS is certified and includes supplier and data quality management"
+            },
+            {
+              "score": 5,
+              "text": "Continuously improved QMS with AI-powered quality monitoring and predictive issue detection"
+            }
+          ]
+        },
+        {
+          "id": "GOV_COBIT_01",
+          "framework": "COBIT 2019",
+          "regulation_map": "EDM01 - Governance Framework",
+          "text": "How does your AI governance integrate with existing IT governance frameworks?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "AI governance is completely separate from IT governance"
+            },
+            {
+              "score": 1,
+              "text": "Informal coordination between AI and IT teams"
+            },
+            {
+              "score": 2,
+              "text": "AI governance referenced in IT governance documents"
+            },
+            {
+              "score": 3,
+              "text": "Integrated governance framework with AI-specific controls"
+            },
+            {
+              "score": 4,
+              "text": "Unified governance with AI risk incorporated into enterprise risk mgmt"
+            },
+            {
+              "score": 5,
+              "text": "Holistic governance ecosystem with real-time AI and IT performance integration"
+            }
+          ]
+        },
+        {
+          "id": "GOV_NIST_01",
+          "framework": "NIST AI RMF 1.0",
+          "regulation_map": "Govern function - GOVERN-1",
+          "text": "Are AI-related decisions and processes subject to human oversight and accountability?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No human oversight; AI operates autonomously"
+            },
+            {
+              "score": 1,
+              "text": "Sporadic human review of AI decisions"
+            },
+            {
+              "score": 2,
+              "text": "Defined oversight process for high-risk AI decisions"
+            },
+            {
+              "score": 3,
+              "text": "Systematic human-in-the-loop for all critical AI operations"
+            },
+            {
+              "score": 4,
+              "text": "Multi-layered oversight with escalation procedures and audit trails"
+            },
+            {
+              "score": 5,
+              "text": "AI-human teaming with continuous oversight optimization and ethics review boards"
+            }
+          ]
+        }
+      ]
+    },
+    "risk_management": {
+      "name": "\ud83d\udee1\ufe0f Risk Management",
+      "description": "Risk identification, assessment, mitigation, and continuous monitoring processes",
+      "questions": [
+        {
+          "id": "RISK_EU_01",
+          "framework": "EU AI Act",
+          "regulation_map": "Annex III - High-risk AI systems classification",
+          "text": "Do you have a systematic process for classifying AI systems by risk level (unacceptable, high, limited, minimal)?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No risk classification system; all AI treated equally"
+            },
+            {
+              "score": 1,
+              "text": "Informal risk discussions without formal classification"
+            },
+            {
+              "score": 2,
+              "text": "Basic risk categories defined but not systematically applied"
+            },
+            {
+              "score": 3,
+              "text": "Formal risk classification process with documented criteria"
+            },
+            {
+              "score": 4,
+              "text": "Automated risk assessment with human validation for high-risk systems"
+            },
+            {
+              "score": 5,
+              "text": "Dynamic, AI-powered risk classification with real-time monitoring and regulatory updates"
+            }
+          ]
+        },
+        {
+          "id": "RISK_EU_02",
+          "framework": "EU AI Act",
+          "regulation_map": "Article 9 - Risk management system",
+          "text": "How do you implement risk mitigation measures proportionate to the identified risk level?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No risk mitigation measures in place"
+            },
+            {
+              "score": 1,
+              "text": "Ad-hoc mitigation based on project-level decisions"
+            },
+            {
+              "score": 2,
+              "text": "Mitigation template exists but not consistently applied"
+            },
+            {
+              "score": 3,
+              "text": "Risk-based mitigation plan with clear accountability"
+            },
+            {
+              "score": 4,
+              "text": "Proportional mitigation with effectiveness validation and stakeholder involvement"
+            },
+            {
+              "score": 5,
+              "text": "Continuous risk monitoring with autonomous mitigation adjustments and regulatory compliance validation"
+            }
+          ]
+        },
+        {
+          "id": "RISK_ISO_01",
+          "framework": "ISO/IEC 42001:2023",
+          "regulation_map": "Section 6.1 - Risk assessment and treatment",
+          "text": "Are AI-specific risks identified, assessed, and treated using a documented methodology?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No AI-specific risk assessment methodology"
+            },
+            {
+              "score": 1,
+              "text": "Generic risk assessment applied to AI without adaptation"
+            },
+            {
+              "score": 2,
+              "text": "AI risk checklist used informally"
+            },
+            {
+              "score": 3,
+              "text": "Documented AI risk assessment process with clear criteria"
+            },
+            {
+              "score": 4,
+              "text": "Integrated risk methodology covering technical, ethical, and business risks"
+            },
+            {
+              "score": 5,
+              "text": "AI-powered continuous risk assessment with predictive modeling and threat intelligence"
+            }
+          ]
+        },
+        {
+          "id": "RISK_COBIT_01",
+          "framework": "COBIT 2019",
+          "regulation_map": "APO12 - Managed Risk",
+          "text": "How do you integrate AI risk management into your enterprise risk management framework?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "AI risks not included in enterprise risk framework"
+            },
+            {
+              "score": 1,
+              "text": "AI risks mentioned in ERM but not formally assessed"
+            },
+            {
+              "score": 2,
+              "text": "Separate AI risk register with periodic ERM reporting"
+            },
+            {
+              "score": 3,
+              "text": "Unified risk taxonomy with AI-specific risk categories in ERM"
+            },
+            {
+              "score": 4,
+              "text": "Integrated AI risk with board-level reporting and capital allocation"
+            },
+            {
+              "score": 5,
+              "text": "Dynamic enterprise-AI risk fusion with real-time risk quantification and hedging"
+            }
+          ]
+        },
+        {
+          "id": "RISK_NIST_01",
+          "framework": "NIST AI RMF 1.0",
+          "regulation_map": "Map & Measure - MAP-1",
+          "text": "Do you continuously monitor and measure AI risks throughout the system lifecycle?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No continuous risk monitoring"
+            },
+            {
+              "score": 1,
+              "text": "Periodic manual risk reviews"
+            },
+            {
+              "score": 2,
+              "text": "Automated monitoring for technical performance only"
+            },
+            {
+              "score": 3,
+              "text": "Continuous monitoring of technical, ethical, and operational risks"
+            },
+            {
+              "score": 4,
+              "text": "Real-time risk dashboards with automated alerts and escalation"
+            },
+            {
+              "score": 5,
+              "text": "Predictive risk intelligence with autonomous response capabilities and continuous learning"
+            }
+          ]
+        }
+      ]
+    },
+    "lifecycle_management": {
+      "name": "\ud83d\udd04 Lifecycle Management",
+      "description": "Development, deployment, operation, and continuous improvement of AI systems",
+      "questions": [
+        {
+          "id": "LIFE_ISO_01",
+          "framework": "ISO/IEC 42001:2023",
+          "regulation_map": "Section 8.3 - AI system impact assessment",
+          "text": "Do you conduct impact assessments before deploying AI systems (including on individuals, society, and environment)?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No impact assessments performed"
+            },
+            {
+              "score": 1,
+              "text": "Informal impact discussions during development"
+            },
+            {
+              "score": 2,
+              "text": "Impact assessment template used for some projects"
+            },
+            {
+              "score": 3,
+              "text": "Systematic impact assessment for all AI systems before deployment"
+            },
+            {
+              "score": 4,
+              "text": "Comprehensive impact assessment with stakeholder consultation and external review"
+            },
+            {
+              "score": 5,
+              "text": "Continuous impact monitoring with real-time mitigation and social responsibility tracking"
+            }
+          ]
+        },
+        {
+          "id": "LIFE_ISO_02",
+          "framework": "ISO/IEC 42001:2023",
+          "regulation_map": "Section 9.1 - Performance monitoring",
+          "text": "How do you monitor AI system performance, accuracy, and drift in production environments?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No production monitoring for AI systems"
+            },
+            {
+              "score": 1,
+              "text": "Manual performance checks on demand"
+            },
+            {
+              "score": 2,
+              "text": "Basic accuracy monitoring for critical systems only"
+            },
+            {
+              "score": 3,
+              "text": "Systematic performance monitoring with defined KPIs and thresholds"
+            },
+            {
+              "score": 4,
+              "text": "Real-time monitoring with automated drift detection and model retraining triggers"
+            },
+            {
+              "score": 5,
+              "text": "AI-powered performance optimization with continuous learning and autonomous model management"
+            }
+          ]
+        },
+        {
+          "id": "LIFE_MLOPS_01",
+          "framework": "Industry MLOps Standards",
+          "regulation_map": "MLflow / Kubeflow best practices",
+          "text": "Do you have automated pipelines for model validation, deployment, and rollback?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "Manual model deployment and validation processes"
+            },
+            {
+              "score": 1,
+              "text": "Scripted deployment but manual validation"
+            },
+            {
+              "score": 2,
+              "text": "CI/CD pipeline for code but not models"
+            },
+            {
+              "score": 3,
+              "text": "Automated model validation and deployment pipelines"
+            },
+            {
+              "score": 4,
+              "text": "Full MLOps with automated testing, A/B deployment, and rollback"
+            },
+            {
+              "score": 5,
+              "text": "Autonomous MLOps with self-healing, continuous deployment, and performance optimization"
+            }
+          ]
+        },
+        {
+          "id": "LIFE_NIST_01",
+          "framework": "NIST AI RMF 1.0",
+          "regulation_map": "Manage - MANAGE-1",
+          "text": "How do you manage and maintain AI systems throughout their operational lifecycle?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No lifecycle management process"
+            },
+            {
+              "score": 1,
+              "text": "Reactive maintenance when issues arise"
+            },
+            {
+              "score": 2,
+              "text": "Scheduled maintenance with version control"
+            },
+            {
+              "score": 3,
+              "text": "Formal lifecycle management with phase-gate reviews"
+            },
+            {
+              "score": 4,
+              "text": "Continuous lifecycle management with automated updates and deprecation planning"
+            },
+            {
+              "score": 5,
+              "text": "AI-driven lifecycle optimization with predictive maintenance and autonomous system evolution"
+            }
+          ]
+        },
+        {
+          "id": "LIFE_COBIT_01",
+          "framework": "COBIT 2019",
+          "regulation_map": "BAI01 - Managed Programs",
+          "text": "How do you govern AI development projects through your project management framework?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "AI projects not governed by PMO"
+            },
+            {
+              "score": 1,
+              "text": "AI projects tracked informally"
+            },
+            {
+              "score": 2,
+              "text": "AI projects follow standard PMO processes"
+            },
+            {
+              "score": 3,
+              "text": "AI-specific project governance with AI risk and ethics checkpoints"
+            },
+            {
+              "score": 4,
+              "text": "Integrated AI-PMO with specialized AI project metrics and governance"
+            },
+            {
+              "score": 5,
+              "text": "Dynamic AI project governance with real-time optimization and predictive success factors"
+            }
+          ]
+        }
+      ]
+    },
+    "transparency_explainability": {
+      "name": "\ud83d\udd0d Transparency & Explainability",
+      "description": "Documentation, communication, interpretability, and stakeholder understanding of AI systems",
+      "questions": [
+        {
+          "id": "TRANS_EU_01",
+          "framework": "EU AI Act",
+          "regulation_map": "Article 13 - Transparency obligations",
+          "text": "Do you provide clear, accessible information to users when they interact with AI systems?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No transparency measures; users unaware of AI interaction"
+            },
+            {
+              "score": 1,
+              "text": "Disclosure in terms of service but not user-visible"
+            },
+            {
+              "score": 2,
+              "text": "Basic AI disclosure in user interface"
+            },
+            {
+              "score": 3,
+              "text": "Clear, prominent disclosure of AI use and its purpose"
+            },
+            {
+              "score": 4,
+              "text": "User-friendly explanation of AI capabilities and limitations"
+            },
+            {
+              "score": 5,
+              "text": "Interactive transparency with personalized explanations and continuous user education"
+            }
+          ]
+        },
+        {
+          "id": "TRANS_EU_02",
+          "framework": "EU AI Act",
+          "regulation_map": "Article 14 - Human oversight",
+          "text": "How do you ensure human oversight for high-risk AI systems while maintaining transparency?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No human oversight for any AI systems"
+            },
+            {
+              "score": 1,
+              "text": "Manual oversight available on request"
+            },
+            {
+              "score": 2,
+              "text": "Human review for high-risk decisions"
+            },
+            {
+              "score": 3,
+              "text": "Systematic human oversight with clear authority to override AI decisions"
+            },
+            {
+              "score": 4,
+              "text": "Human-AI teaming with transparency on oversight decisions and audit trails"
+            },
+            {
+              "score": 5,
+              "text": "Dynamic oversight allocation optimized by risk with continuous transparency reporting"
+            }
+          ]
+        },
+        {
+          "id": "TRANS_OECD_01",
+          "framework": "OECD AI Principles",
+          "regulation_map": "Principle 3 - Transparency and explainability",
+          "text": "Do you provide explainability for AI decisions that significantly affect individuals or outcomes?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No explainability for AI decisions"
+            },
+            {
+              "score": 1,
+              "text": "Post-hoc explanations available upon complaint"
+            },
+            {
+              "score": 2,
+              "text": "Basic explanation techniques for critical decisions"
+            },
+            {
+              "score": 3,
+              "text": "Systematic explainability for all high-impact AI decisions"
+            },
+            {
+              "score": 4,
+              "text": "Multi-level explanations tailored to different stakeholder technical levels"
+            },
+            {
+              "score": 5,
+              "text": "Real-time explainability with interactive exploration and counterfactual analysis"
+            }
+          ]
+        },
+        {
+          "id": "TRANS_NIST_01",
+          "framework": "NIST AI RMF 1.0",
+          "regulation_map": "Explain - EXPLAIN-1",
+          "text": "How do you document AI system capabilities, limitations, and appropriate use cases?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No documentation of AI system capabilities or limitations"
+            },
+            {
+              "score": 1,
+              "text": "Informal documentation for technical teams"
+            },
+            {
+              "score": 2,
+              "text": "Technical documentation exists but not accessible to users"
+            },
+            {
+              "score": 3,
+              "text": "Comprehensive documentation available to all relevant stakeholders"
+            },
+            {
+              "score": 4,
+              "text": "Living documentation updated with model changes and usage feedback"
+            },
+            {
+              "score": 5,
+              "text": "AI-generated documentation with continuous stakeholder feedback integration"
+            }
+          ]
+        },
+        {
+          "id": "TRANS_INDUSTRY_01",
+          "framework": "Industry Best Practices",
+          "regulation_map": "Model Cards & Datasheets",
+          "text": "Do you maintain model cards or datasheets documenting model performance, training data, and evaluation metrics?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No model documentation beyond code comments"
+            },
+            {
+              "score": 1,
+              "text": "Basic model information scattered across documents"
+            },
+            {
+              "score": 2,
+              "text": "Standard model documentation template used inconsistently"
+            },
+            {
+              "score": 3,
+              "text": "Comprehensive model cards maintained for all production models"
+            },
+            {
+              "score": 4,
+              "text": "Automated model card generation integrated into MLOps pipeline"
+            },
+            {
+              "score": 5,
+              "text": "Dynamic model documentation with real-time performance tracking and stakeholder-specific views"
+            }
+          ]
+        }
+      ]
+    },
+    "compliance_ethics": {
+      "name": "\u2696\ufe0f Compliance & Ethics",
+      "description": "Legal compliance, ethical guidelines, data privacy, and responsible AI principles",
+      "questions": [
+        {
+          "id": "COMP_EU_01",
+          "framework": "EU AI Act",
+          "regulation_map": "Article 10 - Data governance",
+          "text": "Do you implement data governance measures ensuring training data is relevant, representative, and free of errors?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No data governance for AI training data"
+            },
+            {
+              "score": 1,
+              "text": "Basic data quality checks on training data"
+            },
+            {
+              "score": 2,
+              "text": "Documented data governance procedures for AI projects"
+            },
+            {
+              "score": 3,
+              "text": "Systematic data governance with quality metrics and validation"
+            },
+            {
+              "score": 4,
+              "text": "Comprehensive data governance with bias detection and mitigation"
+            },
+            {
+              "score": 5,
+              "text": "AI-powered data governance with continuous quality monitoring and automatic bias correction"
+            }
+          ]
+        },
+        {
+          "id": "COMP_EU_02",
+          "framework": "EU AI Act",
+          "regulation_map": "Article 27 - Fundamental rights impact assessment",
+          "text": "Do you conduct fundamental rights impact assessments for AI systems that could affect human rights?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No rights impact assessments performed"
+            },
+            {
+              "score": 1,
+              "text": "Informal consideration of rights impacts"
+            },
+            {
+              "score": 2,
+              "text": "Rights impact assessment template available but rarely used"
+            },
+            {
+              "score": 3,
+              "text": "Systematic rights impact assessments for high-risk systems"
+            },
+            {
+              "score": 4,
+              "text": "Comprehensive assessments with stakeholder engagement and mitigation planning"
+            },
+            {
+              "score": 5,
+              "text": "Continuous rights monitoring with AI ethics committee oversight and public transparency"
+            }
+          ]
+        },
+        {
+          "id": "COMP_OECD_01",
+          "framework": "OECD AI Principles",
+          "regulation_map": "Principle 1 - Human-centered values",
+          "text": "How do you ensure AI systems respect human-centered values and fairness throughout their lifecycle?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No consideration of human-centered values in AI design"
+            },
+            {
+              "score": 1,
+              "text": "Informal discussions about fairness in AI projects"
+            },
+            {
+              "score": 2,
+              "text": "Fairness guidelines exist but are not systematically applied"
+            },
+            {
+              "score": 3,
+              "text": "Formal fairness assessment integrated into AI lifecycle"
+            },
+            {
+              "score": 4,
+              "text": "Continuous fairness monitoring with bias mitigation and diverse stakeholder review"
+            },
+            {
+              "score": 5,
+              "text": "Proactive fairness optimization with inclusive design and social impact validation"
+            }
+          ]
+        },
+        {
+          "id": "COMP_ISO_01",
+          "framework": "ISO/IEC 42001:2023",
+          "regulation_map": "Section 4.2 - Understanding compliance obligations",
+          "text": "How do you identify and comply with applicable AI regulations across different jurisdictions?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No process for identifying AI regulatory compliance obligations"
+            },
+            {
+              "score": 1,
+              "text": "Reactive compliance when regulations are brought to attention"
+            },
+            {
+              "score": 2,
+              "text": "Basic regulatory tracking for primary operating jurisdiction"
+            },
+            {
+              "score": 3,
+              "text": "Systematic monitoring of AI regulations across all operating jurisdictions"
+            },
+            {
+              "score": 4,
+              "text": "Proactive compliance with predictive regulatory intelligence and gap analysis"
+            },
+            {
+              "score": 5,
+              "text": "Continuous regulatory compliance automation with AI-powered legal intelligence and cross-jurisdiction optimization"
+            }
+          ]
+        },
+        {
+          "id": "COMP_GDPR_01",
+          "framework": "Regional Regulations",
+          "regulation_map": "GDPR Articles 22, 35 - Automated decision-making",
+          "text": "How do you ensure AI systems comply with data protection regulations (GDPR, CCPA) regarding automated decisions?",
+          "maturity_levels": [
+            {
+              "score": 0,
+              "text": "No consideration of data protection in AI systems"
+            },
+            {
+              "score": 1,
+              "text": "Basic awareness of data protection requirements"
+            },
+            {
+              "score": 2,
+              "text": "Data protection impact assessments for some AI systems"
+            },
+            {
+              "score": 3,
+              "text": "Systematic DPIAs for all AI systems with automated decision-making"
+            },
+            {
+              "score": 4,
+              "text": "Compliant AI systems with right to explanation, human review, and data portability"
+            },
+            {
+              "score": 5,
+              "text": "Privacy-by-design AI architecture with automated compliance verification and privacy-preserving techniques"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

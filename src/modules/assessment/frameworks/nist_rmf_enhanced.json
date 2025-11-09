@@ -1,0 +1,141 @@
+{
+  "name": "NIST AI RMF Enhanced",
+  "version": "2.0",
+  "description": "Comprehensive AI Governance Assessment with 5 Domains",
+  "scoring": {
+    "levels": [
+      {"min": 0, "max": 25, "level": "Initial", "color": "#ff4444", "description": "Ad-hoc or non-existent processes"},
+      {"min": 25, "max": 50, "level": "Developing", "color": "#ffaa00", "description": "Basic processes established"},
+      {"min": 50, "max": 75, "level": "Proficient", "color": "#00ff00", "description": "Formal, documented processes"},
+      {"min": 75, "max": 100, "level": "Advanced", "color": "#00cc00", "description": "Optimized, measured processes"}
+    ]
+  },
+  "industry_weights": {
+    "healthcare": {"governance": 1.2, "risk": 1.3, "compliance": 1.4},
+    "finance": {"governance": 1.1, "risk": 1.4, "compliance": 1.3},
+    "education": {"governance": 1.1, "risk": 1.2, "compliance": 1.3},
+    "technology": {"governance": 1.0, "risk": 1.1, "compliance": 1.0},
+    "default": {"governance": 1.0, "risk": 1.0, "compliance": 1.0}
+  },
+  "domains": {
+    "governance": {
+      "name": "1. AI Governance & Strategy",
+      "description": "Executive oversight, policies, and strategic alignment",
+      "weight": 0.25,
+      "questions": [
+        {
+          "id": "GOV1",
+          "text": "Has your organization established an AI governance committee with executive leadership?",
+          "description": "Executive oversight and accountability structure",
+          "maturity_levels": [
+            {"score": 0, "text": "No formal governance structure", "evidence_required": false},
+            {"score": 1, "text": "Informal working group exists", "evidence_required": false},
+            {"score": 2, "text": "Formal committee without executive sponsorship", "evidence_required": true},
+            {"score": 3, "text": "Executive-led committee with regular meetings", "evidence_required": true},
+            {"score": 4, "text": "Committee with defined charter and decision authority", "evidence_required": true},
+            {"score": 5, "text": "Board-level oversight with performance metrics", "evidence_required": true}
+          ],
+          "risk_factor": "high"
+        },
+        {
+          "id": "GOV2", 
+          "text": "Do you have a documented AI strategy aligned with business objectives?",
+          "description": "Strategic planning and business alignment",
+          "maturity_levels": [
+            {"score": 0, "text": "No AI strategy exists", "evidence_required": false},
+            {"score": 1, "text": "Informal strategy discussions", "evidence_required": false},
+            {"score": 2, "text": "Draft strategy document", "evidence_required": true},
+            {"score": 3, "text": "Formal, approved AI strategy", "evidence_required": true},
+            {"score": 4, "text": "Strategy with defined KPIs and roadmap", "evidence_required": true},
+            {"score": 5, "text": "Integrated with corporate strategy with regular reviews", "evidence_required": true}
+          ],
+          "risk_factor": "high"
+        }
+      ]
+    },
+    "risk_management": {
+      "name": "2. AI Risk Management", 
+      "description": "Risk identification, assessment, and mitigation processes",
+      "weight": 0.25,
+      "questions": [
+        {
+          "id": "RISK1",
+          "text": "Do you have a formal AI risk assessment framework?",
+          "description": "Structured approach to AI risk identification", 
+          "maturity_levels": [
+            {"score": 0, "text": "No formal risk assessment process", "evidence_required": false},
+            {"score": 1, "text": "Ad-hoc risk discussions", "evidence_required": false},
+            {"score": 2, "text": "Basic risk checklist", "evidence_required": true},
+            {"score": 3, "text": "Formal risk assessment methodology", "evidence_required": true},
+            {"score": 4, "text": "Integrated with enterprise risk management", "evidence_required": true},
+            {"score": 5, "text": "Predictive risk modeling with AI tools", "evidence_required": true}
+          ],
+          "risk_factor": "high"
+        }
+      ]
+    },
+    "lifecycle": {
+      "name": "3. AI Lifecycle Management",
+      "description": "Development, testing, deployment, and monitoring processes", 
+      "weight": 0.20,
+      "questions": [
+        {
+          "id": "LIF1",
+          "text": "Do you have standardized processes for AI model development and testing?",
+          "description": "Consistent development and validation approaches",
+          "maturity_levels": [
+            {"score": 0, "text": "No standardized processes", "evidence_required": false},
+            {"score": 1, "text": "Informal development practices", "evidence_required": false},
+            {"score": 2, "text": "Basic development standards", "evidence_required": true},
+            {"score": 3, "text": "Formal SDLC for AI projects", "evidence_required": true},
+            {"score": 4, "text": "Automated testing and validation", "evidence_required": true},
+            {"score": 5, "text": "Continuous integration/delivery with quality gates", "evidence_required": true}
+          ],
+          "risk_factor": "medium"
+        }
+      ]
+    },
+    "transparency": {
+      "name": "4. AI Transparency & Explainability",
+      "description": "Documentation, explainability, and stakeholder communication",
+      "weight": 0.15, 
+      "questions": [
+        {
+          "id": "TRANS1",
+          "text": "Do you document AI system capabilities, limitations, and intended use?",
+          "description": "Comprehensive AI system documentation",
+          "maturity_levels": [
+            {"score": 0, "text": "No documentation standards", "evidence_required": false},
+            {"score": 1, "text": "Basic system documentation", "evidence_required": false},
+            {"score": 2, "text": "Standardized documentation templates", "evidence_required": true},
+            {"score": 3, "text": "Comprehensive system documentation", "evidence_required": true},
+            {"score": 4, "text": "Automated documentation generation", "evidence_required": true},
+            {"score": 5, "text": "Interactive documentation with real-time updates", "evidence_required": true}
+          ],
+          "risk_factor": "medium"
+        }
+      ]
+    },
+    "compliance": {
+      "name": "5. AI Compliance & Ethics",
+      "description": "Regulatory compliance, ethical guidelines, and monitoring",
+      "weight": 0.15,
+      "questions": [
+        {
+          "id": "COMP1", 
+          "text": "Do you have processes to ensure compliance with AI regulations?",
+          "description": "Regulatory compliance monitoring",
+          "maturity_levels": [
+            {"score": 0, "text": "No compliance monitoring", "evidence_required": false},
+            {"score": 1, "text": "Ad-hoc compliance checks", "evidence_required": false},
+            {"score": 2, "text": "Basic compliance checklist", "evidence_required": true},
+            {"score": 3, "text": "Formal compliance program", "evidence_required": true},
+            {"score": 4, "text": "Automated compliance monitoring", "evidence_required": true},
+            {"score": 5, "text": "Proactive regulatory adaptation", "evidence_required": true}
+          ],
+          "risk_factor": "high"
+        }
+      ]
+    }
+  }
+}

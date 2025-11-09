@@ -1,0 +1,5 @@
+# Use a standard Python 3.10 image from Microsoft's official repository 
+FROM mcr.microsoft.com/devcontainers/python3.10
+
+# You can add commands here to install OS-level packages if needed in the future
+# For example:  RUN apt-get update && apt-get install -y some-package
