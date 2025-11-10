@@ -55,7 +55,7 @@ def render_assessment():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if st.button("✅ Submit Assessment", type="primary", use_container_width=True):
-            scores = calculate_maturity_score(st.session_state.responses)
+            scores = calculate_maturity_score(st.session_state.responses, framework)
             st.session_state.assessment_scores = scores
             st.session_state.current_page = "analytics"
             st.success("Assessment submitted!")

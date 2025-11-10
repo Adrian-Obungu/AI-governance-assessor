@@ -1,9 +1,12 @@
 """Main application entry point"""
 import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 import streamlit as st
 from modules.auth.auth_components import render_login_page
 from modules.assessment.engine import render_assessment, show_assessment_results
 from modules.utils.navigation_manager import nav_manager
+from modules.utils.analytics_dashboard import render_analytics
+
 from modules.utils.analytics_dashboard import render_analytics
 
 
