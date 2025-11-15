@@ -1,1 +1,1 @@
-# Assessment module
+"""Package initialization"""

@@ -16,11 +16,43 @@ class EvidenceManager:
             os.makedirs(self.evidence_dir)
     
     def upload_evidence(self, question_id: str, uploaded_file, description: str = "") -> Dict:
-        """Upload and store evidence for a specific question"""
+        """Upload and store evidence for a specific question with security validation"""
         try:
             if uploaded_file is not None:
-                # Generate unique file name
-                file_extension = uploaded_file.name.split('.')[-1]
+                # Server-side file validation
+                file_size = uploaded_file.size
+                max_file_size = 10 * 1024 * 1024  # 10MB
+                
+                # Check file size
+                if file_size > max_file_size:
+                    st.error(f"File exceeds 10MB limit ({file_size / 1024 / 1024:.1f}MB)")
+                    return None
+                
+                # Validate file type (server-side, not just client-side)
+                allowed_mimetypes = [
+                    'application/pdf',
+                    'application/msword',
+                    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    'text/plain',
+                    'image/png',
+                    'image/jpeg',
+                    'image/jpg'
+                ]
+                
+                if uploaded_file.type not in allowed_mimetypes:
+                    st.error(f"File type '{uploaded_file.type}' not allowed. Allowed: PDF, DOC, DOCX, TXT, PNG, JPG")
+                    return None
+                
+                # Check for path traversal attempts
+                filename = uploaded_file.name
+                if '..' in filename or '/' in filename or '\\' in filename:
+                    st.error("Invalid filename detected")
+                    return None
+                
+                # Generate unique file name (sanitized)
+                import re
+                safe_filename = re.sub(r'[^a-zA-Z0-9._-]', '', filename)
+                file_extension = safe_filename.split('.')[-1] if '.' in safe_filename else 'bin'
                 unique_id = str(uuid.uuid4())[:8]
                 file_name = f"{question_id}_{unique_id}.{file_extension}"
                 file_path = os.path.join(self.evidence_dir, file_name)

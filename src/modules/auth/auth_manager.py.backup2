@@ -1,0 +1,73 @@
+"""Authentication manager"""
+import streamlit as st
+
+class AuthManager:
+    def __init__(self):
+        self.users = {
+            'user@demo.com': {'password': 'demo', 'name': 'Demo User', 'organization': 'Demo Corp', 'role': 'user'},
+            'admin@demo.com': {'password': 'demo', 'name': 'Admin User', 'organization': 'Demo Corp', 'role': 'admin'}
+        }
+    
+    def authenticate(self, email, password):
+        """Authenticate user"""
+        if email in self.users and self.users[email]['password'] == password:
+            return {
+                'id': 1,
+                'email': email,
+                'name': self.users[email]['name'],
+                'organization': self.users[email]['organization'],
+                'role': self.users[email]['role']
+            }
+        return None
+
+auth_manager = AuthManager()
+
+    
+    def create_user(self, email, password, full_name, organization, industry, role="user"):
+        """Create new user account"""
+        import sqlite3
+        from datetime import datetime
+        
+        # Check if user exists
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        cursor.execute("SELECT id FROM users WHERE email = ?", (email,))
+        if cursor.fetchone():
+            conn.close()
+            return None
+        
+        # Hash password
+        import bcrypt
+        password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        
+        # Create organization if doesn't exist
+        cursor.execute("SELECT id FROM organizations WHERE name = ?", (organization,))
+        org_result = cursor.fetchone()
+        if not org_result:
+            cursor.execute("""
+                INSERT INTO organizations (name, industry, size, region, created_at)
+                VALUES (?, ?, ?, ?, ?)
+            """, (organization, industry, "Unknown", "Unknown", datetime.now()))
+            org_id = cursor.lastrowid
+        else:
+            org_id = org_result[0]
+        
+        # Create user
+        cursor.execute("""
+            INSERT INTO users (email, password_hash, full_name, organization, role, is_active, created_at, last_login)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (email, password_hash, full_name, org_id, role, True, datetime.now(), None))
+        
+        user_id = cursor.lastrowid
+        conn.commit()
+        conn.close()
+        
+        # Return user dict
+        return {
+            'id': user_id,
+            'email': email,
+            'full_name': full_name,
+            'organization': org_id,
+            'role': role
+        }
+
