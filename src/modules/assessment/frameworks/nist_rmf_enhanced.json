@@ -1,141 +1,807 @@
 {
-  "name": "NIST AI RMF Enhanced",
-  "version": "2.0",
-  "description": "Comprehensive AI Governance Assessment with 5 Domains",
-  "scoring": {
-    "levels": [
-      {"min": 0, "max": 25, "level": "Initial", "color": "#ff4444", "description": "Ad-hoc or non-existent processes"},
-      {"min": 25, "max": 50, "level": "Developing", "color": "#ffaa00", "description": "Basic processes established"},
-      {"min": 50, "max": 75, "level": "Proficient", "color": "#00ff00", "description": "Formal, documented processes"},
-      {"min": 75, "max": 100, "level": "Advanced", "color": "#00cc00", "description": "Optimized, measured processes"}
+  "governance_strategy": {
+    "name": "Governance & Strategy",
+    "description": "Executive oversight, policies, and strategic alignment for AI governance",
+    "questions": [
+      {
+        "id": "GOV_01",
+        "text": "Does your organization have a formally documented AI governance framework with clear roles and responsibilities?",
+        "framework": "NIST AI RMF, ISO 42001",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No formal framework exists"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc, undocumented approach"
+          },
+          {
+            "score": 2,
+            "text": "Basic framework under development"
+          },
+          {
+            "score": 3,
+            "text": "Documented framework with assigned roles"
+          },
+          {
+            "score": 4,
+            "text": "Comprehensive framework with regular reviews"
+          },
+          {
+            "score": 5,
+            "text": "Optimized framework integrated with enterprise governance"
+          }
+        ]
+      },
+      {
+        "id": "GOV_02",
+        "text": "Is there executive-level oversight and accountability for AI systems across the organization?",
+        "framework": "NIST AI RMF, EU AI Act",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No executive oversight"
+          },
+          {
+            "score": 1,
+            "text": "Limited awareness at executive level"
+          },
+          {
+            "score": 2,
+            "text": "Some executive engagement in major initiatives"
+          },
+          {
+            "score": 3,
+            "text": "Designated executive responsible for AI oversight"
+          },
+          {
+            "score": 4,
+            "text": "Active executive oversight with regular reviews"
+          },
+          {
+            "score": 5,
+            "text": "Executive oversight integrated with corporate strategy"
+          }
+        ]
+      },
+      {
+        "id": "GOV_03",
+        "text": "Does your organization have a defined AI strategy aligned with business objectives?",
+        "framework": "ISO 42001, OECD AI Principles",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No defined AI strategy"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc, project-based initiatives"
+          },
+          {
+            "score": 2,
+            "text": "Developing strategy for AI adoption"
+          },
+          {
+            "score": 3,
+            "text": "Defined strategy with allocated resources"
+          },
+          {
+            "score": 4,
+            "text": "Strategy aligned with business objectives and measured"
+          },
+          {
+            "score": 5,
+            "text": "Continuous optimization of AI strategy based on outcomes"
+          }
+        ]
+      },
+      {
+        "id": "GOV_04",
+        "text": "Are there comprehensive policies for AI system development, deployment, and monitoring?",
+        "framework": "NIST AI RMF, COBIT",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No formal policies exist"
+          },
+          {
+            "score": 1,
+            "text": "Policies under development for some areas"
+          },
+          {
+            "score": 2,
+            "text": "Basic policies in place for critical systems"
+          },
+          {
+            "score": 3,
+            "text": "Comprehensive policies covering most AI systems"
+          },
+          {
+            "score": 4,
+            "text": "Policies regularly updated and enforced"
+          },
+          {
+            "score": 5,
+            "text": "Policies integrated with risk management and continuously improved"
+          }
+        ]
+      },
+      {
+        "id": "GOV_05",
+        "text": "Is there a dedicated AI governance committee or responsible function?",
+        "framework": "ISO 42001, EU AI Act",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No dedicated function or committee"
+          },
+          {
+            "score": 1,
+            "text": "Informal responsibilities assigned"
+          },
+          {
+            "score": 2,
+            "text": "Developing formal governance structure"
+          },
+          {
+            "score": 3,
+            "text": "Dedicated committee with defined responsibilities"
+          },
+          {
+            "score": 4,
+            "text": "Committee with cross-functional representation and authority"
+          },
+          {
+            "score": 5,
+            "text": "Integrated governance with enterprise-wide impact"
+          }
+        ]
+      }
     ]
   },
-  "industry_weights": {
-    "healthcare": {"governance": 1.2, "risk": 1.3, "compliance": 1.4},
-    "finance": {"governance": 1.1, "risk": 1.4, "compliance": 1.3},
-    "education": {"governance": 1.1, "risk": 1.2, "compliance": 1.3},
-    "technology": {"governance": 1.0, "risk": 1.1, "compliance": 1.0},
-    "default": {"governance": 1.0, "risk": 1.0, "compliance": 1.0}
+  "risk_management": {
+    "name": "Risk Management",
+    "description": "Identification, assessment, and mitigation of AI-specific risks",
+    "questions": [
+      {
+        "id": "RISK_01",
+        "text": "Does your organization have a systematic process for identifying AI-specific risks?",
+        "framework": "NIST AI RMF, ISO 31000",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No formal risk identification process"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc identification of obvious risks"
+          },
+          {
+            "score": 2,
+            "text": "Developing systematic risk identification"
+          },
+          {
+            "score": 3,
+            "text": "Defined process for identifying AI risks"
+          },
+          {
+            "score": 4,
+            "text": "Proactive risk identification with regular reviews"
+          },
+          {
+            "score": 5,
+            "text": "Continuous risk identification integrated with enterprise risk management"
+          }
+        ]
+      },
+      {
+        "id": "RISK_02",
+        "text": "Are AI risks systematically assessed and prioritized based on impact and likelihood?",
+        "framework": "NIST AI RMF, COBIT",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No formal risk assessment"
+          },
+          {
+            "score": 1,
+            "text": "Basic assessment of high-profile risks"
+          },
+          {
+            "score": 2,
+            "text": "Developing risk assessment methodology"
+          },
+          {
+            "score": 3,
+            "text": "Systematic risk assessment and prioritization"
+          },
+          {
+            "score": 4,
+            "text": "Quantitative risk assessment with documented priorities"
+          },
+          {
+            "score": 5,
+            "text": "Dynamic risk assessment with real-time prioritization"
+          }
+        ]
+      },
+      {
+        "id": "RISK_03",
+        "text": "Are there defined mitigation strategies for identified AI risks?",
+        "framework": "NIST AI RMF, ISO 31000",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No mitigation strategies"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc mitigation for critical risks"
+          },
+          {
+            "score": 2,
+            "text": "Developing mitigation strategies"
+          },
+          {
+            "score": 3,
+            "text": "Defined mitigation strategies for most risks"
+          },
+          {
+            "score": 4,
+            "text": "Comprehensive mitigation with regular updates"
+          },
+          {
+            "score": 5,
+            "text": "Proactive mitigation with continuous improvement"
+          }
+        ]
+      },
+      {
+        "id": "RISK_04",
+        "text": "Is there a process for continuous monitoring and review of AI risks?",
+        "framework": "NIST AI RMF, COBIT",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No monitoring process"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc monitoring of major incidents"
+          },
+          {
+            "score": 2,
+            "text": "Developing monitoring framework"
+          },
+          {
+            "score": 3,
+            "text": "Defined monitoring and review process"
+          },
+          {
+            "score": 4,
+            "text": "Regular monitoring with documented reviews"
+          },
+          {
+            "score": 5,
+            "text": "Continuous monitoring with automated alerts"
+          }
+        ]
+      },
+      {
+        "id": "RISK_05",
+        "text": "Are AI risk management activities integrated with enterprise risk management?",
+        "framework": "NIST AI RMF, COSO",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "Not integrated with ERM"
+          },
+          {
+            "score": 1,
+            "text": "Limited integration for reporting"
+          },
+          {
+            "score": 2,
+            "text": "Developing integration framework"
+          },
+          {
+            "score": 3,
+            "text": "Integrated with some ERM processes"
+          },
+          {
+            "score": 4,
+            "text": "Fully integrated with regular alignment"
+          },
+          {
+            "score": 5,
+            "text": "Seamlessly integrated with continuous alignment"
+          }
+        ]
+      }
+    ]
   },
-  "domains": {
-    "governance": {
-      "name": "1. AI Governance & Strategy",
-      "description": "Executive oversight, policies, and strategic alignment",
-      "weight": 0.25,
-      "questions": [
-        {
-          "id": "GOV1",
-          "text": "Has your organization established an AI governance committee with executive leadership?",
-          "description": "Executive oversight and accountability structure",
-          "maturity_levels": [
-            {"score": 0, "text": "No formal governance structure", "evidence_required": false},
-            {"score": 1, "text": "Informal working group exists", "evidence_required": false},
-            {"score": 2, "text": "Formal committee without executive sponsorship", "evidence_required": true},
-            {"score": 3, "text": "Executive-led committee with regular meetings", "evidence_required": true},
-            {"score": 4, "text": "Committee with defined charter and decision authority", "evidence_required": true},
-            {"score": 5, "text": "Board-level oversight with performance metrics", "evidence_required": true}
-          ],
-          "risk_factor": "high"
-        },
-        {
-          "id": "GOV2", 
-          "text": "Do you have a documented AI strategy aligned with business objectives?",
-          "description": "Strategic planning and business alignment",
-          "maturity_levels": [
-            {"score": 0, "text": "No AI strategy exists", "evidence_required": false},
-            {"score": 1, "text": "Informal strategy discussions", "evidence_required": false},
-            {"score": 2, "text": "Draft strategy document", "evidence_required": true},
-            {"score": 3, "text": "Formal, approved AI strategy", "evidence_required": true},
-            {"score": 4, "text": "Strategy with defined KPIs and roadmap", "evidence_required": true},
-            {"score": 5, "text": "Integrated with corporate strategy with regular reviews", "evidence_required": true}
-          ],
-          "risk_factor": "high"
-        }
-      ]
-    },
-    "risk_management": {
-      "name": "2. AI Risk Management", 
-      "description": "Risk identification, assessment, and mitigation processes",
-      "weight": 0.25,
-      "questions": [
-        {
-          "id": "RISK1",
-          "text": "Do you have a formal AI risk assessment framework?",
-          "description": "Structured approach to AI risk identification", 
-          "maturity_levels": [
-            {"score": 0, "text": "No formal risk assessment process", "evidence_required": false},
-            {"score": 1, "text": "Ad-hoc risk discussions", "evidence_required": false},
-            {"score": 2, "text": "Basic risk checklist", "evidence_required": true},
-            {"score": 3, "text": "Formal risk assessment methodology", "evidence_required": true},
-            {"score": 4, "text": "Integrated with enterprise risk management", "evidence_required": true},
-            {"score": 5, "text": "Predictive risk modeling with AI tools", "evidence_required": true}
-          ],
-          "risk_factor": "high"
-        }
-      ]
-    },
-    "lifecycle": {
-      "name": "3. AI Lifecycle Management",
-      "description": "Development, testing, deployment, and monitoring processes", 
-      "weight": 0.20,
-      "questions": [
-        {
-          "id": "LIF1",
-          "text": "Do you have standardized processes for AI model development and testing?",
-          "description": "Consistent development and validation approaches",
-          "maturity_levels": [
-            {"score": 0, "text": "No standardized processes", "evidence_required": false},
-            {"score": 1, "text": "Informal development practices", "evidence_required": false},
-            {"score": 2, "text": "Basic development standards", "evidence_required": true},
-            {"score": 3, "text": "Formal SDLC for AI projects", "evidence_required": true},
-            {"score": 4, "text": "Automated testing and validation", "evidence_required": true},
-            {"score": 5, "text": "Continuous integration/delivery with quality gates", "evidence_required": true}
-          ],
-          "risk_factor": "medium"
-        }
-      ]
-    },
-    "transparency": {
-      "name": "4. AI Transparency & Explainability",
-      "description": "Documentation, explainability, and stakeholder communication",
-      "weight": 0.15, 
-      "questions": [
-        {
-          "id": "TRANS1",
-          "text": "Do you document AI system capabilities, limitations, and intended use?",
-          "description": "Comprehensive AI system documentation",
-          "maturity_levels": [
-            {"score": 0, "text": "No documentation standards", "evidence_required": false},
-            {"score": 1, "text": "Basic system documentation", "evidence_required": false},
-            {"score": 2, "text": "Standardized documentation templates", "evidence_required": true},
-            {"score": 3, "text": "Comprehensive system documentation", "evidence_required": true},
-            {"score": 4, "text": "Automated documentation generation", "evidence_required": true},
-            {"score": 5, "text": "Interactive documentation with real-time updates", "evidence_required": true}
-          ],
-          "risk_factor": "medium"
-        }
-      ]
-    },
-    "compliance": {
-      "name": "5. AI Compliance & Ethics",
-      "description": "Regulatory compliance, ethical guidelines, and monitoring",
-      "weight": 0.15,
-      "questions": [
-        {
-          "id": "COMP1", 
-          "text": "Do you have processes to ensure compliance with AI regulations?",
-          "description": "Regulatory compliance monitoring",
-          "maturity_levels": [
-            {"score": 0, "text": "No compliance monitoring", "evidence_required": false},
-            {"score": 1, "text": "Ad-hoc compliance checks", "evidence_required": false},
-            {"score": 2, "text": "Basic compliance checklist", "evidence_required": true},
-            {"score": 3, "text": "Formal compliance program", "evidence_required": true},
-            {"score": 4, "text": "Automated compliance monitoring", "evidence_required": true},
-            {"score": 5, "text": "Proactive regulatory adaptation", "evidence_required": true}
-          ],
-          "risk_factor": "high"
-        }
-      ]
-    }
+  "lifecycle_management": {
+    "name": "Lifecycle Management",
+    "description": "End-to-end management of AI system development, deployment, and maintenance",
+    "questions": [
+      {
+        "id": "LIFE_01",
+        "text": "Does your organization have a defined development lifecycle for AI systems?",
+        "framework": "NIST AI RMF, ISO 42001",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No defined development process"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc development approach"
+          },
+          {
+            "score": 2,
+            "text": "Developing standardized lifecycle"
+          },
+          {
+            "score": 3,
+            "text": "Defined development lifecycle"
+          },
+          {
+            "score": 4,
+            "text": "Managed and measured development process"
+          },
+          {
+            "score": 5,
+            "text": "Optimized lifecycle with continuous improvement"
+          }
+        ]
+      },
+      {
+        "id": "LIFE_02",
+        "text": "Are there standards for data quality, management, and governance for AI systems?",
+        "framework": "ISO 42001, EU AI Act",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No data quality standards"
+          },
+          {
+            "score": 1,
+            "text": "Basic data quality checks"
+          },
+          {
+            "score": 2,
+            "text": "Developing data governance standards"
+          },
+          {
+            "score": 3,
+            "text": "Defined data quality standards"
+          },
+          {
+            "score": 4,
+            "text": "Managed data quality with regular audits"
+          },
+          {
+            "score": 5,
+            "text": "Optimized data management with continuous monitoring"
+          }
+        ]
+      },
+      {
+        "id": "LIFE_03",
+        "text": "Is there a comprehensive testing and validation process for AI systems?",
+        "framework": "NIST AI RMF, ISO 42001",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No formal testing process"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc testing for critical systems"
+          },
+          {
+            "score": 2,
+            "text": "Developing testing framework"
+          },
+          {
+            "score": 3,
+            "text": "Defined testing and validation process"
+          },
+          {
+            "score": 4,
+            "text": "Comprehensive testing with documentation"
+          },
+          {
+            "score": 5,
+            "text": "Continuous testing integrated with development"
+          }
+        ]
+      },
+      {
+        "id": "LIFE_04",
+        "text": "Are there procedures for safe deployment and monitoring of AI systems in production?",
+        "framework": "NIST AI RMF, COBIT",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No deployment procedures"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc deployment process"
+          },
+          {
+            "score": 2,
+            "text": "Developing deployment standards"
+          },
+          {
+            "score": 3,
+            "text": "Defined deployment procedures"
+          },
+          {
+            "score": 4,
+            "text": "Managed deployment with monitoring"
+          },
+          {
+            "score": 5,
+            "text": "Automated deployment with continuous monitoring"
+          }
+        ]
+      },
+      {
+        "id": "LIFE_05",
+        "text": "Is there a process for ongoing maintenance, updates, and decommissioning of AI systems?",
+        "framework": "ISO 42001, NIST AI RMF",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No maintenance process"
+          },
+          {
+            "score": 1,
+            "text": "Reactive maintenance when issues arise"
+          },
+          {
+            "score": 2,
+            "text": "Developing maintenance framework"
+          },
+          {
+            "score": 3,
+            "text": "Defined maintenance and update process"
+          },
+          {
+            "score": 4,
+            "text": "Proactive maintenance with scheduled updates"
+          },
+          {
+            "score": 5,
+            "text": "Continuous maintenance with automated updates"
+          }
+        ]
+      }
+    ]
+  },
+  "transparency_explainability": {
+    "name": "Transparency & Explainability",
+    "description": "Documentation, communication, and understanding of AI system behavior",
+    "questions": [
+      {
+        "id": "TRANS_01",
+        "text": "Are AI systems designed to provide meaningful explanations for their decisions?",
+        "framework": "EU AI Act, ISO 42001",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No explanation capability"
+          },
+          {
+            "score": 1,
+            "text": "Basic explanations for some systems"
+          },
+          {
+            "score": 2,
+            "text": "Developing explanation capabilities"
+          },
+          {
+            "score": 3,
+            "text": "Most systems provide explanations"
+          },
+          {
+            "score": 4,
+            "text": "Comprehensive explanations for all systems"
+          },
+          {
+            "score": 5,
+            "text": "Advanced explanations tailored to stakeholders"
+          }
+        ]
+      },
+      {
+        "id": "TRANS_02",
+        "text": "Is there comprehensive documentation for AI system functionality and limitations?",
+        "framework": "NIST AI RMF, ISO 42001",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No documentation"
+          },
+          {
+            "score": 1,
+            "text": "Minimal documentation"
+          },
+          {
+            "score": 2,
+            "text": "Developing documentation standards"
+          },
+          {
+            "score": 3,
+            "text": "Comprehensive documentation for most systems"
+          },
+          {
+            "score": 4,
+            "text": "Documentation regularly updated and reviewed"
+          },
+          {
+            "score": 5,
+            "text": "Documentation integrated with development lifecycle"
+          }
+        ]
+      },
+      {
+        "id": "TRANS_03",
+        "text": "Are AI system outputs and decisions documented and traceable?",
+        "framework": "EU AI Act, COBIT",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No traceability"
+          },
+          {
+            "score": 1,
+            "text": "Limited traceability for critical decisions"
+          },
+          {
+            "score": 2,
+            "text": "Developing traceability process"
+          },
+          {
+            "score": 3,
+            "text": "Most decisions are traceable"
+          },
+          {
+            "score": 4,
+            "text": "Comprehensive traceability with audit trails"
+          },
+          {
+            "score": 5,
+            "text": "Full traceability integrated with business processes"
+          }
+        ]
+      },
+      {
+        "id": "TRANS_04",
+        "text": "Is there a process for communicating AI system capabilities to stakeholders?",
+        "framework": "ISO 42001, OECD AI Principles",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No communication process"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc communication when requested"
+          },
+          {
+            "score": 2,
+            "text": "Developing communication framework"
+          },
+          {
+            "score": 3,
+            "text": "Defined communication process"
+          },
+          {
+            "score": 4,
+            "text": "Regular and proactive communication"
+          },
+          {
+            "score": 5,
+            "text": "Tailored communication for different stakeholders"
+          }
+        ]
+      },
+      {
+        "id": "TRANS_05",
+        "text": "Are AI systems designed to be auditable for compliance and performance?",
+        "framework": "EU AI Act, NIST AI RMF",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "Not designed for auditability"
+          },
+          {
+            "score": 1,
+            "text": "Limited audit capabilities"
+          },
+          {
+            "score": 2,
+            "text": "Developing audit requirements"
+          },
+          {
+            "score": 3,
+            "text": "Most systems are auditable"
+          },
+          {
+            "score": 4,
+            "text": "Comprehensive audit trails and tools"
+          },
+          {
+            "score": 5,
+            "text": "Continuous auditing with automated compliance"
+          }
+        ]
+      }
+    ]
+  },
+  "compliance_ethics": {
+    "name": "Compliance & Ethics",
+    "description": "Regulatory compliance, ethical guidelines, and responsible AI practices",
+    "questions": [
+      {
+        "id": "COMP_01",
+        "text": "Does your organization have a formal code of ethics for AI development and use?",
+        "framework": "EU AI Act, OECD AI Principles",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No formal code of ethics"
+          },
+          {
+            "score": 1,
+            "text": "Under development"
+          },
+          {
+            "score": 2,
+            "text": "Draft code of ethics in place"
+          },
+          {
+            "score": 3,
+            "text": "Formal code of ethics adopted"
+          },
+          {
+            "score": 4,
+            "text": "Code integrated with policies and training"
+          },
+          {
+            "score": 5,
+            "text": "Continuous review and improvement of ethical standards"
+          }
+        ]
+      },
+      {
+        "id": "COMP_02",
+        "text": "Are AI systems compliant with relevant regulations and standards?",
+        "framework": "EU AI Act, ISO 42001",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "Not compliant with regulations"
+          },
+          {
+            "score": 1,
+            "text": "Aware of regulations but not compliant"
+          },
+          {
+            "score": 2,
+            "text": "Working towards compliance"
+          },
+          {
+            "score": 3,
+            "text": "Compliant with major regulations"
+          },
+          {
+            "score": 4,
+            "text": "Proactively compliant with all regulations"
+          },
+          {
+            "score": 5,
+            "text": "Compliance integrated with design and development"
+          }
+        ]
+      },
+      {
+        "id": "COMP_03",
+        "text": "Is there a process for addressing ethical concerns and complaints about AI systems?",
+        "framework": "OECD AI Principles, EU AI Act",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No process for ethical concerns"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc handling of concerns"
+          },
+          {
+            "score": 2,
+            "text": "Developing formal process"
+          },
+          {
+            "score": 3,
+            "text": "Defined process for handling concerns"
+          },
+          {
+            "score": 4,
+            "text": "Proactive monitoring and resolution"
+          },
+          {
+            "score": 5,
+            "text": "Continuous improvement based on feedback"
+          }
+        ]
+      },
+      {
+        "id": "COMP_04",
+        "text": "Are AI systems regularly assessed for bias, fairness, and discrimination?",
+        "framework": "EU AI Act, ISO 42001",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No bias assessment"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc assessments for high-risk systems"
+          },
+          {
+            "score": 2,
+            "text": "Developing bias assessment process"
+          },
+          {
+            "score": 3,
+            "text": "Regular assessments for bias and fairness"
+          },
+          {
+            "score": 4,
+            "text": "Comprehensive assessments with mitigation"
+          },
+          {
+            "score": 5,
+            "text": "Continuous monitoring and improvement"
+          }
+        ]
+      },
+      {
+        "id": "COMP_05",
+        "text": "Is there mandatory training on AI ethics and compliance for relevant staff?",
+        "framework": "ISO 42001, EU AI Act",
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No training on AI ethics"
+          },
+          {
+            "score": 1,
+            "text": "Optional training available"
+          },
+          {
+            "score": 2,
+            "text": "Developing training program"
+          },
+          {
+            "score": 3,
+            "text": "Regular training for relevant staff"
+          },
+          {
+            "score": 4,
+            "text": "Comprehensive training with certification"
+          },
+          {
+            "score": 5,
+            "text": "Continuous training integrated with development"
+          }
+        ]
+      }
+    ]
   }
 }

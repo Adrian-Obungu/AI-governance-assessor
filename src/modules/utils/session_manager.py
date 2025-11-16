@@ -1,168 +1,143 @@
+"""
+ROBUST SESSION MANAGEMENT SYSTEM
+Centralized state management for AI Governance Pro
+"""
 import streamlit as st
-import json
-import uuid
-from datetime import datetime
-from typing import Dict, Any
+from datetime import datetime, timedelta
+import hashlib
 
 class SessionManager:
     def __init__(self):
-        self.sessions_dir = "saved_sessions"
+        self.session_timeout = timedelta(hours=2)
+        self._initialize_session_state()
     
-    def save_session(self, session_data: Dict, session_name: str = None) -> str:
-        """Save current session to file"""
-        try:
-            if session_name is None:
-                session_name = f"assessment_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    def _initialize_session_state(self):
+        """Initialize all session state variables with defaults"""
+        defaults = {
+            # Authentication
+            'user': None,
+            'logged_in': False,
+            'user_role': 'guest',
+            'org_id': None,
             
-            session_id = str(uuid.uuid4())[:8]
+            # Navigation
+            'current_page': 'login',
+            'previous_page': None,
             
-            # Prepare session data
-            save_data = {
-                'session_id': session_id,
-                'session_name': session_name,
-                'save_date': datetime.now().isoformat(),
-                'data': session_data
-            }
+            # Assessment
+            'assessment_started': False,
+            'assessment_completed': False,
+            'assessment_responses': {},
+            'assessment_scores': None,
+            'current_domain': None,
+            'current_question_index': 0,
             
-            # Store in session state
-            if 'saved_sessions' not in st.session_state:
-                st.session_state.saved_sessions = {}
+            # UI State
+            'dark_mode': False,
+            'sidebar_collapsed': False,
             
-            st.session_state.saved_sessions[session_id] = save_data
+            # Security
+            'session_id': self._generate_session_id(),
+            'last_activity': datetime.now(),
             
-            # For download
-            return json.dumps(save_data, indent=2)
-            
-        except Exception as e:
-            st.error(f"Session save failed: {str(e)}")
-            return None
-    
-    def load_session(self, session_data: str) -> bool:
-        """Load session from JSON data"""
-        try:
-            session_dict = json.loads(session_data)
-            
-            # Restore session state
-            if 'data' in session_dict:
-                data = session_dict['data']
-                
-                # Restore responses
-                if 'responses' in data:
-                    st.session_state.responses = data['responses']
-                
-                # Restore user info
-                if 'user_info' in data:
-                    st.session_state.user_info = data['user_info']
-                
-                # Restore evidence
-                if 'evidence' in data:
-                    st.session_state.evidence = data['evidence']
-                
-                return True
-            
-            return False
-            
-        except Exception as e:
-            st.error(f"Session load failed: {str(e)}")
-            return False
-    
-    def get_session_data(self) -> Dict:
-        """Get current session data for saving"""
-        return {
-            'responses': st.session_state.get('responses', {}),
-            'user_info': st.session_state.get('user_info', {}),
-            'evidence': st.session_state.get('evidence', {}),
-            'timestamp': datetime.now().isoformat()
+            # Demo Limitations
+            'demo_questions_answered': 0,
+            'max_demo_questions': 10
         }
+        
+        for key, value in defaults.items():
+            if key not in st.session_state:
+                st.session_state[key] = value
     
-    def render_session_management(self):
-        """Render session management interface with improved UI"""
-        with st.expander("💾 Session Management", expanded=False):
-            
-            # Save Session Section
-            st.subheader("Save Current Session")
-            
-            session_name = st.text_input(
-                "Session Name",
-                value=f"assessment_{datetime.now().strftime('%Y%m%d')}",
-                help="Name for this assessment session",
-                key="session_name_input"
-            )
-            
-            col1, col2 = st.columns([1, 1])
-            with col1:
-                if st.button("💾 Save Session", use_container_width=True, key="save_session_btn"):
-                    session_data = self.get_session_data()
-                    json_data = self.save_session(session_data, session_name)
-                    
-                    if json_data:
-                        st.success("✅ Session saved!")
-                        
-                        # Show download button
-                        st.download_button(
-                            "📥 Download Session File",
-                            json_data,
-                            file_name=f"{session_name}.json",
-                            mime="application/json",
-                            use_container_width=True,
-                            key="download_session_btn"
-                        )
-            
-            with col2:
-                if st.button("🔄 Refresh", use_container_width=True, key="refresh_btn"):
-                    st.rerun()
-            
-            st.markdown("---")
-            
-            # Load Session Section
-            st.subheader("Load Session")
-            
-            uploaded_session = st.file_uploader(
-                "Choose session file",
-                type=['json'],
-                help="Upload a previously saved session file",
-                key="session_uploader"
-            )
-            
-            if uploaded_session is not None:
-                file_details = {
-                    "FileName": uploaded_session.name,
-                    "FileType": uploaded_session.type,
-                    "FileSize": f"{uploaded_session.size} bytes"
-                }
-                
-                st.write("**File Details:**")
-                st.json(file_details, expanded=False)
-                
-                if st.button("🔄 Load Uploaded Session", use_container_width=True, key="load_session_btn"):
-                    try:
-                        session_data = uploaded_session.getvalue().decode()
-                        if self.load_session(session_data):
-                            st.success("✅ Session loaded successfully!")
-                            st.rerun()
-                        else:
-                            st.error("❌ Failed to load session data")
-                    except Exception as e:
-                        st.error(f"❌ Error loading session: {str(e)}")
-            
-            # Session Statistics
-            if st.session_state.get('responses'):
-                st.markdown("---")
-                st.subheader("Session Statistics")
-                
-                col1, col2 = st.columns(2)
-                with col1:
-                    answered = len([v for v in st.session_state.responses.values() if v is not None])
-                    st.metric("Questions Answered", answered)
-                
-                with col2:
-                    if 'evidence' in st.session_state:
-                        evidence_count = sum(len(ev_list) for ev_list in st.session_state.evidence.values())
-                        st.metric("Evidence Files", evidence_count)
+    def _generate_session_id(self):
+        """Generate unique session ID"""
+        import uuid
+        return str(uuid.uuid4())
+    
+    def validate_session(self):
+        """Validate session is still active and secure"""
+        if not st.session_state.logged_in:
+            return False
+        
+        # Check session timeout
+        time_since_activity = datetime.now() - st.session_state.last_activity
+        if time_since_activity > self.session_timeout:
+            self.logout()
+            return False
+        
+        # Update last activity
+        st.session_state.last_activity = datetime.now()
+        return True
+    
+    def login_user(self, user_data):
+        """Secure user login with session initialization"""
+        st.session_state.user = user_data
+        st.session_state.logged_in = True
+        st.session_state.user_role = user_data.get('role', 'user')
+        st.session_state.org_id = user_data.get('org_id', None)
+        st.session_state.last_activity = datetime.now()
+        
+        # Initialize assessment state
+        st.session_state.assessment_responses = {}
+        st.session_state.assessment_completed = False
+        st.session_state.current_page = 'assessment'
+        
+        # Apply demo limitations
+        if st.session_state.user_role == 'demo':
+            st.session_state.demo_questions_answered = 0
+            st.session_state.max_demo_questions = 10
+    
+    def logout(self):
+        """Secure logout with complete state cleanup"""
+        keys_to_preserve = ['dark_mode']  # Preserve UI preferences
+        
+        preserved = {}
+        for key in keys_to_preserve:
+            if key in st.session_state:
+                preserved[key] = st.session_state[key]
+        
+        # Clear all session state
+        st.session_state.clear()
+        
+        # Restore preserved values
+        for key, value in preserved.items():
+            st.session_state[key] = value
+        
+        # Re-initialize defaults
+        self._initialize_session_state()
+    
+    def navigate_to(self, page):
+        """Safe navigation with state validation"""
+        if self.validate_session() or page in ['login', 'register']:
+            st.session_state.previous_page = st.session_state.current_page
+            st.session_state.current_page = page
+            st.session_state.last_activity = datetime.now()
+            return True
+        return False
+    
+    def save_response(self, question_id, response):
+        """Save assessment response with validation"""
+        if not self.validate_session():
+            return False
+        
+        st.session_state.assessment_responses[question_id] = {
+            'response': response,
+            'timestamp': datetime.now(),
+            'question_id': question_id
+        }
+        
+        # Track demo question usage
+        if st.session_state.user_role == 'demo':
+            st.session_state.demo_questions_answered = len(st.session_state.assessment_responses)
+        
+        return True
+    
+    def can_answer_more_questions(self):
+        """Check if user can answer more questions (demo limitations)"""
+        if st.session_state.user_role != 'demo':
+            return True
+        
+        return st.session_state.demo_questions_answered < st.session_state.max_demo_questions
 
-# Global instance
+# Global session manager instance
 session_manager = SessionManager()
-# BACKWARD COMPATIBILITY FUNCTION
-def initialize_session():
-    """Legacy wrapper for SessionManager initialization"""
-    return SessionManager()

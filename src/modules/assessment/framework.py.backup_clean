@@ -1,0 +1,34 @@
+"""Framework loader for AI Governance Pro"""
+import json
+import os
+
+
+def get_assessment_framework():
+    """
+    Load the multi-framework assessment framework from JSON file.
+    Returns a dictionary with domain structure.
+    """
+    framework_path = 'src/modules/assessment/frameworks/multi_framework_enhanced.json'
+    
+    if not os.path.exists(framework_path):
+        raise FileNotFoundError(f"Framework file not found: {framework_path}")
+    
+    with open(framework_path, 'r', encoding='utf-8') as f:
+        framework = json.load(f)
+    
+    # Validate framework structure
+    if not framework or len(framework) == 0:
+        raise ValueError("Framework loaded but contains no domains")
+    
+    # Print diagnostic info
+    print(f"✅ Framework loaded: {len(framework)} domains")
+    for domain_id, domain_data in framework.items():
+        print(f"  {domain_data['name']}: {len(domain_data['questions'])} questions")
+    
+    return framework
+
+
+# Test the loader
+if __name__ == "__main__":
+    framework = get_assessment_framework()
+    print(f"\n✅ Framework ready with {len(framework)} domains")

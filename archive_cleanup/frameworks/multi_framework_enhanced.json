@@ -1,0 +1,76 @@
+{
+  "governance_strategy": {
+    "name": "Governance & Strategy",
+    "description": "Executive oversight and strategic AI governance",
+    "questions": [
+      {
+        "id": "GOV_1",
+        "text": "Has leadership established a formal AI governance framework with clear roles?",
+        "frameworks": [
+          "ISO 42001",
+          "NIST RMF"
+        ],
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No formal framework exists"
+          },
+          {
+            "score": 1,
+            "text": "Ad-hoc discussions only"
+          },
+          {
+            "score": 2,
+            "text": "Framework drafted but not implemented"
+          },
+          {
+            "score": 3,
+            "text": "Partially implemented in some units"
+          },
+          {
+            "score": 4,
+            "text": "Fully implemented with regular reviews"
+          },
+          {
+            "score": 5,
+            "text": "Industry-leading with continuous improvement"
+          }
+        ]
+      },
+      {
+        "id": "GOV_2",
+        "text": "Is there a dedicated AI governance committee with cross-functional representation?",
+        "frameworks": [
+          "ISO 42001",
+          "OECD"
+        ],
+        "maturity_levels": [
+          {
+            "score": 0,
+            "text": "No dedicated committee"
+          },
+          {
+            "score": 1,
+            "text": "Informal group without authority"
+          },
+          {
+            "score": 2,
+            "text": "Committee exists but meets infrequently"
+          },
+          {
+            "score": 3,
+            "text": "Regular meetings with defined responsibilities"
+          },
+          {
+            "score": 4,
+            "text": "Committee has decision-making authority"
+          },
+          {
+            "score": 5,
+            "text": "Integral to business strategy with executive sponsorship"
+          }
+        ]
+      }
+    ]
+  }
+}
