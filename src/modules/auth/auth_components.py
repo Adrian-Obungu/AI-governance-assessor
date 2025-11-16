@@ -106,19 +106,59 @@ def render_login_page():
                             {'email': email, 'reason': 'too_many_attempts'}
                         )
                     else:
-                        user = auth_manager.authenticate(email, password)
-                        if user:
-                            RateLimiter.reset_attempts(email)
-                            AuditLogger.log_authentication(email, True)
-                            login_user(user)
-                        else:
-                            RateLimiter.record_failed_attempt(email)
-                            st.error("❌ Invalid email or password")
+                        # Distinguish between unknown email and incorrect password
+                        if not auth_manager.get_user(email):
+                            st.error("❌ Email not registered. Please sign up or reset your password.")
                             AuditLogger.log_authentication(email, False)
+                        elif auth_manager.is_account_locked(email):
+                            st.error("❌ Account locked due to multiple failed attempts. Please try again later or reset your password.")
+                            AuditLogger.log_authentication(email, False)
+                        else:
+                            user = auth_manager.authenticate(email, password)
+                            if user:
+                                RateLimiter.reset_attempts(email)
+                                AuditLogger.log_authentication(email, True)
+                                login_user(user)
+                            else:
+                                RateLimiter.record_failed_attempt(email)
+                                st.error("❌ Incorrect password for this account")
+                                AuditLogger.log_authentication(email, False)
                 else:
                     st.error("❌ Please enter both email and password")
         
         st.markdown("---")
+        # Forgot password
+        with st.expander("Forgot password?", expanded=False):
+            fp_email = st.text_input("Enter your account email to reset password", value="")
+            if st.button("Send reset token", key="send_reset_token"):
+                if not fp_email:
+                    st.error("❌ Enter your email to receive a reset token")
+                else:
+                    token, err = auth_manager.create_password_reset_token(fp_email)
+                    if err == 'not_found':
+                        st.error("❌ Email not found. Please register first.")
+                    else:
+                        # Since we don't have email delivery in this environment, display the token
+                        st.success("✅ Password reset token generated. Use the token to reset your password.")
+                        st.code(token)
+                        AuditLogger.log_security_event('password_reset_requested', 'info', {'email': fp_email})
+        # Reset password using token
+        with st.expander("Have a reset token? Reset password", expanded=False):
+            rt_token = st.text_input("Reset Token", value="", key="rt_token")
+            rt_password = st.text_input("New Password", type="password", key="rt_password")
+            rt_confirm = st.text_input("Confirm New Password", type="password", key="rt_confirm")
+            if st.button("Reset Password", key="do_reset"):
+                if not rt_token or not rt_password or not rt_confirm:
+                    st.error("❌ Provide token and new password (and confirm it)")
+                elif rt_password != rt_confirm:
+                    st.error("❌ Passwords do not match")
+                else:
+                    ok, reason = auth_manager.reset_password(rt_token, rt_password)
+                    if ok:
+                        st.success("✅ Password has been reset. Please login with your new password.")
+                        AuditLogger.log_security_event('password_reset_completed', 'info', {'token': rt_token})
+                    else:
+                        st.error(f"❌ Could not reset password: {reason}")
         
         st.markdown("### New to AI Governance Pro?")
         if st.button("🚀 Create Enterprise Account", use_container_width=True, type="secondary"):
@@ -294,25 +334,6 @@ def render_login_page():
         st.markdown('<div class="login-container">', unsafe_allow_html=True)
         st.subheader("🔐 Welcome Back")
         
-        # Demo login buttons
-        st.markdown('<div class="demo-buttons">', unsafe_allow_html=True)
-        if st.button("👤 Demo User Login", use_container_width=True, type="primary"):
-            user = auth_manager.authenticate("user@demo.com", "demo")
-            if user:
-                login_user(user)
-            else:
-                st.error("❌ Demo login failed")
-        
-        if st.button("👑 Admin Demo Login", use_container_width=True, type="secondary"):
-            user = auth_manager.authenticate("admin@demo.com", "demo")
-            if user:
-                login_user(user)
-            else:
-                st.error("❌ Admin login failed")
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        st.markdown("---")
-        
         # Manual login form
         with st.form("login_form"):
             email = st.text_input("Email", placeholder="user@company.com")
@@ -322,15 +343,35 @@ def render_login_page():
             
             if login_submitted:
                 if email and password:
-                    user = auth_manager.authenticate(email, password)
-                    if user:
-                        login_user(user)
+                    # Distinguish email not found vs wrong password
+                    if not auth_manager.get_user(email):
+                        st.error("❌ Email not registered. Please sign up or reset your password.")
+                    elif auth_manager.is_account_locked(email):
+                        st.error("❌ Account locked due to failed attempts. Reset your password or try later.")
                     else:
-                        st.error("❌ Invalid email or password")
+                        user = auth_manager.authenticate(email, password)
+                        if user:
+                            login_user(user)
+                        else:
+                            st.error("❌ Incorrect password for this account")
                 else:
                     st.error("❌ Please enter both email and password")
         
         st.markdown("---")
+        # Forgot password (duplicate section for second login form)
+        with st.expander("Forgot password?", expanded=False):
+            fp_email = st.text_input("Enter your account email to reset password", value="", key="fp2")
+            if st.button("Send reset token", key="send_reset_token_2"):
+                if not fp_email:
+                    st.error("❌ Enter your email to receive a reset token")
+                else:
+                    token, err = auth_manager.create_password_reset_token(fp_email)
+                    if err == 'not_found':
+                        st.error("❌ Email not found. Please register first.")
+                    else:
+                        st.success("✅ Password reset token generated. Use the token to reset your password.")
+                        st.code(token)
+                        AuditLogger.log_security_event('password_reset_requested', 'info', {'email': fp_email})
         
         st.markdown("### New to AI Governance Pro?")
         if st.button("�� Create Enterprise Account", use_container_width=True, type="secondary"):

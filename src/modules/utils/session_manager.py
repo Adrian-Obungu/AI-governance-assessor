@@ -18,6 +18,7 @@ class SessionManager:
             'user': None,
             'logged_in': False,
             'user_role': 'guest',
+            'org_id': None,
             
             # Navigation
             'current_page': 'login',
@@ -73,6 +74,7 @@ class SessionManager:
         st.session_state.user = user_data
         st.session_state.logged_in = True
         st.session_state.user_role = user_data.get('role', 'user')
+        st.session_state.org_id = user_data.get('org_id', None)
         st.session_state.last_activity = datetime.now()
         
         # Initialize assessment state

@@ -3,12 +3,16 @@ Configuration management for AI Governance Pro
 Centralizes all configuration with environment-based overrides
 """
 import os
-from dotenv import load_dotenv
 from typing import Optional
 import logging
 
-# Load environment variables from .env file
-load_dotenv()
+# Load environment variables from .env file if available
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # python-dotenv not installed, proceed without .env support
+    pass
 
 logger = logging.getLogger(__name__)
 

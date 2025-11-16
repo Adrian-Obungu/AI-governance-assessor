@@ -21,6 +21,7 @@ class DatabaseManager:
             CREATE TABLE IF NOT EXISTS assessments (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER NOT NULL,
+                org_id INTEGER,
                 assessment_name TEXT,
                 framework_version TEXT,
                 overall_score REAL,
@@ -33,6 +34,14 @@ class DatabaseManager:
                 FOREIGN KEY(user_id) REFERENCES users(id)
             )
         """)
+        
+        # Database migration: Add org_id if missing
+        cursor.execute("PRAGMA table_info(assessments)")
+        assessment_columns = [col[1] for col in cursor.fetchall()]
+        
+        if 'org_id' not in assessment_columns:
+            cursor.execute("ALTER TABLE assessments ADD COLUMN org_id INTEGER")
+            logger.info("Added org_id column to assessments table")
         
         # Assessment responses table
         cursor.execute("""
@@ -67,6 +76,7 @@ class DatabaseManager:
         
         # Create indexes for performance
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_assessments_user_id ON assessments(user_id)")
+        cursor.execute("CREATE INDEX IF NOT EXISTS idx_assessments_org_id ON assessments(org_id)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_assessments_created ON assessments(created_at)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_responses_assessment ON assessment_responses(assessment_id)")
         cursor.execute("CREATE INDEX IF NOT EXISTS idx_domain_scores_assessment ON domain_scores(assessment_id)")
@@ -220,6 +230,43 @@ class DatabaseManager:
             return df.to_csv(index=False)
         except Exception as e:
             logger.error(f"Error exporting to CSV: {str(e)}")
+            return None
+    
+    def get_user_assessments_isolated(self, user_id, org_id):
+        """Return assessments for a user, filtered by org_id."""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM assessments WHERE user_id=? AND org_id=? ORDER BY created_at DESC", (user_id, org_id))
+            assessments = cursor.fetchall()
+            conn.close()
+            return assessments or []
+        except Exception as e:
+            logger.error(f"Error retrieving isolated assessments: {str(e)}")
+            return []
+
+    def get_assessment_by_id_isolated(self, assessment_id, org_id):
+        """Return assessment only if it matches org_id."""
+        try:
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM assessments WHERE id=? AND org_id=?", (assessment_id, org_id))
+            assessment = cursor.fetchone()
+            if not assessment:
+                conn.close()
+                return None
+            cursor.execute("SELECT * FROM domain_scores WHERE assessment_id=?", (assessment_id,))
+            domain_scores = cursor.fetchall()
+            cursor.execute("SELECT * FROM assessment_responses WHERE assessment_id=?", (assessment_id,))
+            responses = cursor.fetchall()
+            conn.close()
+            return {
+                'assessment': assessment,
+                'domain_scores': domain_scores,
+                'responses': responses
+            }
+        except Exception as e:
+            logger.error(f"Error retrieving isolated assessment: {str(e)}")
             return None
 
 db_manager = DatabaseManager()

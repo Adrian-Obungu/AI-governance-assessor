@@ -2,10 +2,17 @@
 Data encryption module for enterprise security
 Handles encryption/decryption of PII and sensitive data
 """
-from cryptography.fernet import Fernet
 import logging
 import os
 from typing import Optional
+
+try:
+    from cryptography.fernet import Fernet
+    ENCRYPTION_AVAILABLE = True
+except ImportError:
+    ENCRYPTION_AVAILABLE = False
+    logger = logging.getLogger(__name__)
+    logger.warning("cryptography package not installed. Encryption features disabled.")
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +22,11 @@ class EncryptionManager:
     
     def __init__(self):
         """Initialize with encryption key from environment"""
+        if not ENCRYPTION_AVAILABLE:
+            logger.warning("cryptography not installed. Encryption disabled.")
+            self.cipher = None
+            return
+        
         self.key = os.getenv("ENCRYPTION_KEY")
         
         if not self.key:
